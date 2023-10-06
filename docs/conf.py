@@ -21,10 +21,12 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('.'))
 
-# The members of the html_context dict are available inside topindex.html
+# The MICROPY_VERSION env var should be "vX.Y.Z" (or unset).
 micropy_version = os.getenv('MICROPY_VERSION') or 'latest'
 micropy_all_versions = (os.getenv('MICROPY_ALL_VERSIONS') or 'latest').split(',')
 url_pattern = '%s/en/%%s' % (os.getenv('MICROPY_URL_PREFIX') or '/',)
+
+# The members of the html_context dict are available inside topindex.html
 html_context = {
     'cur_version':micropy_version,
     'all_versions':[
@@ -51,6 +53,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
+    'sphinxcontrib.jquery',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -67,7 +70,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'MicroPython'
-copyright = '- The MicroPython Documentation is Copyright © 2014-2022, Damien P. George, Paul Sokolovsky, and contributors'
+copyright = '- The MicroPython Documentation is Copyright © 2014-2023, Damien P. George, Paul Sokolovsky, and contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -233,7 +236,7 @@ latex_elements = {
 # Additional stuff for the LaTeX preamble.
 #'preamble': '',
 # Include 3 levels of headers in PDF ToC
-'preamble': '\setcounter{tocdepth}{2}',
+'preamble': r'\setcounter{tocdepth}{2}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
